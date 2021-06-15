@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+
+  callacar_rabbitmq:
+    image: 'rabbitmq:3-management'
+    container_name: 'callacar_rabbitmq'
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+    volumes:
+      - ./conf/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+
+  frontend:
+    build: frontend/.
+    container_name: 'frontend'
+    restart: on-failure
+    ports:
+      - '8081:8080'
+    environment:
+      - MQ_URL=amqp://callacar_rabbitmq:5672
+    depends_on:
+      - callacar_rabbitmq
+
+  database:
+    image: 'mongo'
+    container_name: 'database'
+    ports:
+      - '27013:27017'
+    volumes:
+      - ./conf/mongod.conf:/etc/mongod.conf
+    command: ["-f", "/etc/mongod.conf"]
+
+  backend:
+    build: backend/.
+    container_name: 'backend'
+    restart: on-failure
+    ports:
+      - '8083:8080'
+    environment:
+      - MONGO_URL=mongodb://database:27017/app_development
+      - MQ_URL=amqp://callacar_rabbitmq:5672
+    depends_on:
+      - callacar_rabbitmq
+      - database
