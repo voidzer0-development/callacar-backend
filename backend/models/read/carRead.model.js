@@ -1,21 +1,21 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const RunwaySchema = new Schema({
-    operationId: {
+const carReadSchema = new Schema({
+    brand: {
         type: String,
         required: true
     },
-	length: {
-		type: Number,
+	type: {
+		type: String,
 		required: true
 	},
-	width: {
-		type: Number,
+	model: {
+		type: String,
 		required: true
 	}
 }, {
 	timestamps: true
 });
 
-module.exports = mongoose.model('Runway', RunwaySchema);
+module.exports = mongoose.model('CarRead', carReadSchema);

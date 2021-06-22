@@ -1,21 +1,21 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const RunwayReplaySchema = new Schema({
-    operationId: {
+const carWriteSchema = new Schema({
+    brand: {
         type: String,
         required: true
     },
-	length: {
-		type: Number,
+	type: {
+		type: String,
 		required: true
 	},
-	width: {
-		type: Number,
+	model: {
+		type: String,
 		required: true
 	}
 }, {
 	timestamps: true
 });
 
-module.exports = mongoose.model('RunwayReplay', RunwayReplaySchema);
+module.exports = mongoose.model('CarWrite', carWriteSchema);
