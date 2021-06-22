@@ -49,48 +49,36 @@ async function resolveEvent(event){
 
     switch (eventType) {
         
-        //taxiway events
-        case 'createTaxiway':
+        //car events
+        case 'createCar':
           replayController.TaxiwayCreate(object);
           break;
-        case 'updateTaxiway':
+        case 'updateCar':
           replayController.TaxiwayUpdate(object);
           break;
-        case 'deleteTaxiway':
+        case 'deleteCar':
           replayController.TaxiwayDelete(object);
           break;
-        //runway
-        case 'createRunway':
+        //ride
+        case 'createRide':
           replayController.RunwayCreate(object);
           break;
-        case 'updateRunway':
+        case 'updateRide':
           replayController.RunwayUpdate(object);
           break;
-        case 'deleteRunway':
+        case 'deleteRide':
           replayController.RunwayDelete(object);
           break;
           
-        //auxillary fuel tank events
-        case 'createFueltank':
+        //user events
+        case 'createUser':
           replayController.FueltankCreate(object);
           break;
-        case 'updateFueltank':
+        case 'updateUser':
           replayController.FueltankUpdate(object);
           break;
-        case 'deleteFueltank':
+        case 'deleteUser':
           replayController.FueltankDelete(object);
-         //airplane from queue
-        case 'createAirplane':
-          replayController.AirplaneCreate(object);
-          break;
-        case 'updateAirplane':
-          replayController.AirplaneUpdate(object);
-          break;
-        case 'deleteAirplane':
-          replayController.AirplaneDelete(object);
-        default:
-          console.warn('Replay Event Type Unknown, ignoring event');
-          break;
       }
 }
   

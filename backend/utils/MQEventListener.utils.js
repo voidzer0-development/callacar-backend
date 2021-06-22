@@ -1,14 +1,13 @@
 const amqp = require('amqplib/callback_api');
 
-const taxiwayDenormalize = require('../controllers/denorm/taxiwayDenormalize.controller');
-const runwayDenormalize = require('../controllers/denorm/runwayDenormalize.controller');
-const fueltankDenormalize = require('../controllers/denorm/fueltankDenormalize.controller');
-const airplaneDenormalize = require('../controllers/denorm/airplaneDenormalize.controller');
+const carDenormalize = require('../controllers/denorm/carDenormalize.controller');
+const rideDenormalize = require('../controllers/denorm/rideDenormalize.controller');
+const userDenormalize = require('../controllers/denorm/userDenormalize.controller');
 
 const eventStore = require('../models/eventStore.model');
 
 const { MQ_URL } = process.env;
-const queue = 'airside';
+const queue = 'cc_backend';
 
 amqp.connect(MQ_URL, (connectionError, connection) => {
   if (connectionError) throw connectionError;
@@ -43,48 +42,35 @@ amqp.connect(MQ_URL, (connectionError, connection) => {
         
           //resolve the event type
           switch (eventType) {
-            //taxiway events
-            case 'createTaxiway':
-              taxiwayDenormalize.TaxiwayCreate(object);
+            //car events
+            case 'createCar':
+              carDenormalize.CarCreate(object);
               break;
-            case 'updateTaxiway':
-              taxiwayDenormalize.TaxiwayUpdate(object);
+            case 'updateCar':
+              carDenormalize.CarUpdate(object);
               break;
-            case 'deleteTaxiway':
-              taxiwayDenormalize.TaxiwayDelete(object);
+            case 'deleteCar':
+              carDenormalize.CarDelete(object);
               break;
-            //runway
-            case 'createRunway':
-              runwayDenormalize.RunwayCreate(object);
+            //ride
+            case 'createRide':
+              rideDenormalize.RideCreate(object);
               break;
-            case 'updateRunway':
-              runwayDenormalize.RunwayUpdate(object);
+            case 'updateRide':
+              rideDenormalize.RideUpdate(object);
               break;
-            case 'deleteRunway':
-              runwayDenormalize.RunwayDelete(object);
+            case 'deleteRide':
+              rideDenormalize.RideDelete(object);
               break;
-            //auxillary fuel tank events
-            case 'createFueltank':
-              fueltankDenormalize.FueltankCreate(object);
+            //user
+            case 'createUser':
+              userDenormalize.UserCreate(object);
               break;
-            case 'updateFueltank':
-              fueltankDenormalize.FueltankUpdate(object);
+            case 'updateUser':
+              userDenormalize.UserUpdate(object);
               break;
-            case 'deleteFueltank':
-              fueltankDenormalize.FueltankDelete(object);
-              break;
-              //airplane from queue
-            case 'createAirplane':
-              airplaneDenormalize.AirplaneCreate(object);
-              break;
-            case 'updateAirplane':
-              airplaneDenormalize.AirplaneUpdate(object);
-              break;
-            case 'deleteAirplane':
-              airplaneDenormalize.AirplaneDelete(object);
-              break;
-            default:
-              console.warn('Event Type Unknown');
+            case 'deleteUser':
+              userDenormalize.UserDelete(object);
               break;
           }
         } catch (notJsonException) {

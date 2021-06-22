@@ -1,158 +1,121 @@
-const fueltankReplay = require('../replayModels/fueltank.replay');
-const taxiwayReplay = require('../replayModels/taxiway.replay');
-const runwayReplay = require('../replayModels/runway.replay');
-const airplaneReplay = require('../replayModels/airplane.replay');
+const carReplay = require('../replayModels/car.replay');
+const userReplay = require('../replayModels/user.replay');
+const rideReplay = require('../replayModels/ride.replay');
 const mongoose = require('mongoose');
 
-let fueltanks = [];
-let runways = [];
-let taxiways = [];
-let airplanes = [];
+let cars = [];
+let rides = [];
+let users = [];
 
-const FueltankGetAll = (req, res, next) => {
-    return res.status(200).json(fueltanks).end();
+const CarGetAll = (req, res, next) => {
+    return res.status(200).json(cars).end();
 };
 
-const FueltankRead = (req, res, next) => {
-    const found = fueltanks.find(element => element._id = req.params.id);
+const CarRead = (req, res, next) => {
+    const found = cars.find(element => element._id = req.params.id);
 
     return res.status(200).json(found).end();
 };
 
-const FueltankCreate = (fueltank) => {
-    const fueltankNew = new fueltankReplay(fueltank);
-    fueltanks.push(fueltankNew);
+const CarCreate = (car) => {
+    const carNew = new carReplay(car);
+    cars.push(carNew);
 };
   
-const FueltankUpdate = (fueltank) => {
-    const found = fueltanks.find(element => element._id = fueltank._id);
-    const index = fueltanks.indexOf(found);
-    fueltanks[index] = fueltank;
+const CarUpdate = (car) => {
+    const found = cars.find(element => element._id = car._id);
+    const index = cars.indexOf(found);
+    cars[index] = car;
 };
 
-const FueltankDelete = async (fueltank) => {
-    const found = fueltanks.find(element => element._id = fueltank._id);
-    const index = fueltanks.indexOf(found);
+const CarDelete = async (carNew) => {
+    const found = cars.find(element => element._id = car._id);
+    const index = cars.indexOf(found);
     if (index > -1) {
-        fueltanks.splice(index, 1);
+        cars.splice(index, 1);
     }
 };
 
-const RunwayGetAll = (req, res, next) => {
-    return res.status(200).json(fueltanks).end();
+const RideGetAll = (req, res, next) => {
+    return res.status(200).json(rides).end();
 };
 
-const RunwayRead = (req, res, next) => {
+const RideRead = (req, res, next) => {
     const found = runways.find(element => element._id = req.params.id);
 
     return res.status(200).json(found).end();
 };
 
-const RunwayCreate = (runway) => {
-    const RunwayNew = new runwayReplay(runway);
-    runways.push(RunwayNew);
+const RideCreate = (ride) => {
+    const rideNew = new rideReplay(ride);
+    rides.push(rideNew);
 };
   
-const RunwayUpdate = (runway) => {
-    const found = runways.find(element => element._id = runway._id);
-    const index = runways.indexOf(found);
-    runways[index] = runway;
+const RideUpdate = (ride) => {
+    const found = rides.find(element => element._id = ride._id);
+    const index = rides.indexOf(found);
+    rides[index] = ride;
 };
 
-const RunwayDelete = async (runway) => {
-    const found = runways.find(element => element._id = runway._id);
-    const index = runways.indexOf(found);
+const RideDelete = async (ride) => {
+    const found = rides.find(element => element._id = ride._id);
+    const index = rides.indexOf(found);
     if (index > -1) {
-        runways.splice(index, 1);
+        rides.splice(index, 1);
     }
 };
 
-const TaxiwayGetAll = (req, res, next) => {
-    return res.status(200).json(taxiways).end();
+const UserGetAll = (req, res, next) => {
+    return res.status(200).json(users).end();
 };
 
-const TaxiwayRead = (req, res, next) => {
-    const found = taxiways.find(element => element._id = req.params.id);
+const UserRead = (req, res, next) => {
+    const found = users.find(element => element._id = req.params.id);
 
     return res.status(200).json(found).end();
 };
 
-const TaxiwayCreate = (taxiway) => {
-    const taxiwayNew = new taxiwayReplay(taxiway);
-    taxiways.push(taxiwayNew);
+const UserCreate = (usr) => {
+    const usrNew = new userReplay(usr);
+    users.push(usrNew);
 };
   
-const TaxiwayUpdate = (taxiway) => {
-    const found = taxiways.find(element => element._id = taxiway._id);
-    const index = taxiways.indexOf(found);
-    taxiways[index] = taxiway;
+const UserUpdate = (usr) => {
+    const found = users.find(element => element._id = usr._id);
+    const index = users.indexOf(found);
+    users[index] = usr;
 };
 
-const TaxiwayDelete = async (taxiway) => {
-    const found = taxiways.find(element => element._id = taxiway._id);
-    const index = taxiways.indexOf(found);
+const UserDelete = async (usr) => {
+    const found = users.find(element => element._id = usr._id);
+    const index = users.indexOf(found);
     if (index > -1) {
-        taxiways.splice(index, 1);
-    }
-};
-
-const AirplaneGetAll = (req, res, next) => {
-    return res.status(200).json(airplanes).end();
-};
-
-const AirplaneRead = (req, res, next) => {
-    const found = airplanes.find(element => element._id = req.params.id);
-
-    return res.status(200).json(found).end();
-};
-
-const AirplaneCreate = (airplane) => {
-    const airplaneNew = new airplaneReplay(airplane);
-    airplanes.push(airplaneNew);
-};
-  
-const AirplaneUpdate = (airplane) => {
-    const found = airplanes.find(element => element._id = airplane._id);
-    const index = airplanes.indexOf(found);
-    airplanes[index] = airplane;
-};
-
-const AirplaneDelete = async (airplane) => {
-    const found = airplanes.find(element => element._id = airplane._id);
-    const index = airplanes.indexOf(found);
-    if (index > -1) {
-        airplanes.splice(index, 1);
+        users.splice(index, 1);
     }
 };
 
 function emptyRebuiltStore() {
-    fueltanks = [];
-    runways = [];
-    taxiways = [];
-    airplanes = [];
+    cars = [];
+    rides = [];
+    users = [];
 };
 
 module.exports = {
-    FueltankCreate,
-    FueltankGetAll,
-    FueltankRead,
-    FueltankUpdate,
-    FueltankDelete,
-    RunwayGetAll,
-    RunwayRead,
-    RunwayCreate,
-    RunwayUpdate,
-    RunwayDelete,
-    TaxiwayGetAll,
-    TaxiwayRead,
-    TaxiwayCreate,
-    TaxiwayUpdate,
-    TaxiwayDelete,
-    AirplaneGetAll,
-    AirplaneRead,
-    AirplaneCreate,
-    AirplaneUpdate,
-    AirplaneDelete,
+    CarCreate,
+    CarGetAll,
+    CarRead,
+    CarUpdate,
+    CarDelete,
+    RideGetAll,
+    RideRead,
+    RideCreate,
+    RideUpdate,
+    RideDelete,
+    UserGetAll,
+    UserRead,
+    UserCreate,
+    UserUpdate,
+    UserDelete,
     emptyRebuiltStore,
 };
   
