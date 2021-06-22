@@ -7,17 +7,14 @@ router.post('/', replayUtility.replayEvents);
 router.delete('/', replayUtility.deleteEventStore);
 
 // query rebuilt state
-router.get('/fueltankReplay/:id', queryRebuilt.FueltankRead);
-router.get('/fueltankReplay/', queryRebuilt.FueltankGetAll);
+router.get('/carReplay/:id', queryRebuilt.CarRead);
+router.get('/carReplay/', queryRebuilt.CarGetAll);
 
-router.get('/runwayReplay/:id', queryRebuilt.RunwayRead);
-router.get('/runwayReplay/', queryRebuilt.RunwayGetAll);
+router.get('/rideReplay/:id', queryRebuilt.RideRead);
+router.get('/rideReplay/', queryRebuilt.RideGetAll);
 
-router.get('/taxiwayReplay/:id', queryRebuilt.TaxiwayRead);
-router.get('/taxiwayReplay/', queryRebuilt.TaxiwayGetAll);
-
-router.get('/airplaneReplay/:id', queryRebuilt.AirplaneRead);
-router.get('/airplaneReplay/', queryRebuilt.AirplaneGetAll);
+router.get('/userReplay/:id', queryRebuilt.UserRead);
+router.get('/userReplay/', queryRebuilt.UserGetAll);
 
 
 router.use('*', (req, res) =>
