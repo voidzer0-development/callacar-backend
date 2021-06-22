@@ -51,34 +51,34 @@ async function resolveEvent(event){
         
         //car events
         case 'createCar':
-          replayController.TaxiwayCreate(object);
+          replayController.CarCreate(object);
           break;
         case 'updateCar':
-          replayController.TaxiwayUpdate(object);
+          replayController.CarUpdate(object);
           break;
         case 'deleteCar':
-          replayController.TaxiwayDelete(object);
+          replayController.CarDelete(object);
           break;
         //ride
         case 'createRide':
-          replayController.RunwayCreate(object);
+          replayController.RideCreate(object);
           break;
         case 'updateRide':
-          replayController.RunwayUpdate(object);
+          replayController.RideUpdate(object);
           break;
         case 'deleteRide':
-          replayController.RunwayDelete(object);
+          replayController.RideDelete(object);
           break;
           
         //user events
         case 'createUser':
-          replayController.FueltankCreate(object);
+          replayController.UserCreate(object);
           break;
         case 'updateUser':
-          replayController.FueltankUpdate(object);
+          replayController.UserUpdate(object);
           break;
         case 'deleteUser':
-          replayController.FueltankDelete(object);
+          replayController.UserDelete(object);
       }
 }
   
