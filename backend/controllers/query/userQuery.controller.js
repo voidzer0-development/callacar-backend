@@ -14,7 +14,15 @@ const UserGetAll = (req, res, next) => {
   });
 };
 
+const fUserReadMail = (req, res, next) => {
+  UserRead.findOne({email: req.body.email}, (err, obj) => {
+    if (err) return next(err);
+    return res.status(200).json(obj).end();
+  });
+};
+
 module.exports = {
   fUserRead,
+  fUserReadMail,
  UserGetAll,
 };

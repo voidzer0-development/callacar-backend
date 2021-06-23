@@ -19,16 +19,13 @@ const rideReadSchema = new Schema({
 		required: true
 	},
 	lengthKm: {
-		type: Number,
-		required: true
+		type: Number
 	},
 	costEuro: {
-		type: Number,
-		required: true
+		type: Number
 	},
 	paid: {
-		type: Boolean,
-		required: true
+		type: Boolean
    }
 }, {
 	timestamps: true

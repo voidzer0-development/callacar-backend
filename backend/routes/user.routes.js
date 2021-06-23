@@ -9,6 +9,7 @@ router.delete('/:id', userCommand.UserDelete);
 
 // query
 router.get('/:id', userQuery.fUserRead);
+router.get('/login', userQuery.fUserReadMail);
 router.get('/', userQuery.UserGetAll);
 
 router.use('*', (req, res) =>
