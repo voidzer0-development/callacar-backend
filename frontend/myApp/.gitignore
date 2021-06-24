@@ -29,3 +29,12 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+
+# Generate your app icon and splash screens using cordova-res --skip-config --copy
+/resources/android
+/resources/ios
+/resources/windows
+
+# Ignore build files.
+/android
+/ios
