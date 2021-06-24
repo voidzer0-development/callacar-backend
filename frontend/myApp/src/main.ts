@@ -23,9 +23,17 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+
+
+
+
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
+
+import ApiService from '@/services/api.service';
+
+ApiService.init('localhost:4200');
   
 router.isReady().then(() => {
   app.mount('#app');
