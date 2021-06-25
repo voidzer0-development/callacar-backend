@@ -20,7 +20,7 @@
             <ion-input
               type="text"
               class="form-control"
-              v-model="accomodation.name"
+              v-model="ride.car"
               id="accomodation_name"
               required
             />
@@ -28,25 +28,21 @@
 
           <ion-item>
             <ion-label position="floating">Type</ion-label>
-            <ion-select
-              placeholder="Select a type..."
-              v-model="accomodation.type"
-              interface="popover"
+            <ion-input
+              type="text"
+              class="form-control"
+              v-model="ride.customerId"
+              id="accomodation_type"
               required
-            >
-              <ion-select-option value="S">Standaard</ion-select-option>
-              <ion-select-option value="C">Comfort</ion-select-option>
-              <ion-select-option value="T">Trekker</ion-select-option>
-            </ion-select>
+            />
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Area</ion-label>
             <ion-input
-              type="number"
-              step=".01"
+              type="text"
               class="form-control"
-              v-model="accomodation.area"
+              v-model="ride.startPoint"
               id="accomodation_area"
               required
             />
@@ -55,10 +51,9 @@
           <ion-item>
             <ion-label position="floating">Price per Day</ion-label>
             <ion-input
-              type="number"
-              step=".01"
+              type="text"
               class="form-control"
-              v-model="accomodation.daily_price"
+              v-model="ride.endPoint"
               id="accomodation_daily_price"
               required
             />
@@ -67,28 +62,11 @@
           <ion-item>
             <ion-label position="floating">Price per Season</ion-label>
             <ion-input
-              type="number"
-              step=".01"
+              type="text"
               class="form-control"
-              v-model="accomodation.season_price"
+              v-model="ride.lengthKm"
               id="accomodation_season_price"
             />
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Utilities</ion-label>
-            <ion-select
-              multiple="true"
-              v-model="accomodation.utilities"
-              :disabled="utilitiesLoading"
-            >
-              <ion-select-option
-                v-for="utility in utilities"
-                :key="utility.id"
-                :value="utility.id"
-                >{{ utility.name }}</ion-select-option
-              >
-            </ion-select>
           </ion-item>
 
           <ion-button type="submit" :disabled="disableSubmit">
@@ -113,16 +91,16 @@ import {
   IonInput,
   IonLabel,
   IonItem,
-  IonSelect,
-  IonSelectOption,
+  // IonSelect,
+  // IonSelectOption,
   alertController,
 } from "@ionic/vue";
 
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
 
-import { AccomodationService } from "@/services/accomodation.service";
-import { UtilityService } from "@/services/utility.service";
+import { RideService } from "@/services/ride.service";
+// import { UtilityService } from "@/services/utility.service";
 
 export default defineComponent({
   name: "Detail",
@@ -133,28 +111,22 @@ export default defineComponent({
         return mode === "ios" ? "Back" : "";
       },
       disableSubmit: false,
-      utilitiesLoading: true,
-      utilities: null,
-      accomodation: {
-        name: null,
-        type: null,
-        area: null,
-        daily_price: null,
-        season_price: null,
-        utilities: [],
-      },
+      ride: { 
+        car: null,
+        customerId: null,
+        startPoint: null,
+        endPoint: null,
+        lengthKm: null,
+        costEuro: null,
+        paid: null,
+    },
     };
-  },
-  async mounted() {
-    const response = await UtilityService.getUtilities();
-    this.utilities = response.data;
-    this.utilitiesLoading = false;
   },
   methods: {
     async handleCreate() {
       if (this.disableSubmit) return;
 
-      if (!this.accomodation.type) {
+      if (!this.ride.customerId) {
         const errorAlert = await alertController.create({
           header: "Type is required",
           message: "Please select a type for this accomodation.",
@@ -164,17 +136,18 @@ export default defineComponent({
       }
 
       const data = {
-        name: this.accomodation.name,
-        type: this.accomodation.type,
-        area: Number.parseFloat(this.accomodation.area) || 0,
-        daily_price: Number.parseFloat(this.accomodation.daily_price) || 0,
-        season_price: Number.parseFloat(this.accomodation.season_price) || 0,
-        utilities: this.accomodation.utilities,
+        car: this.ride.car,
+        customerId: this.ride.customerId,
+        startPoint: this.ride.startPoint,
+        endPoint: this.ride.endPoint,
+        lengthKm: this.ride.lengthKm,
+        costEuro: this.ride.costEuro,
+        paid: this.ride.paid,
       };
 
       try {
         this.disableSubmit = true;
-        await AccomodationService.createAccomodation(data);
+        await RideService.create(data);
         this.router.push("/tabs/accomodations");
       } catch (error) {
         const errorAlert = await alertController.create({
@@ -200,8 +173,8 @@ export default defineComponent({
     IonButton,
     IonInput,
     IonLabel,
-    IonSelect,
-    IonSelectOption,
+    // IonSelect,
+    // IonSelectOption,
     IonItem,
   },
   setup() {

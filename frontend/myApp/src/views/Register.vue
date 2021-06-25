@@ -25,8 +25,12 @@
 
           <ion-card-content>
             <ion-item>
-              <ion-label position="floating">Name</ion-label>
-              <ion-input v-model="form.name" id="name" required></ion-input>
+              <ion-label position="floating">First name</ion-label>
+              <ion-input v-model="form.firstName" id="firstName" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Last name</ion-label>
+              <ion-input v-model="form.lastName" id="lastName" required></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Email</ion-label>
@@ -38,6 +42,14 @@
               ></ion-input>
             </ion-item>
             <ion-item>
+              <ion-label position="floating">Phone number</ion-label>
+              <ion-input v-model="form.phoneNr" id="phoneNr" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">License</ion-label>
+              <ion-checkbox v-model="form.license" id= "license" required></ion-checkbox>
+            </ion-item>
+            <!-- <ion-item>
               <ion-label position="floating">Password</ion-label>
               <ion-input
                 type="password"
@@ -45,8 +57,9 @@
                 id="email"
                 required
               ></ion-input>
-            </ion-item>
+            </ion-item> -->
           </ion-card-content>
+
 
           <ion-card-content>
             <ion-button type="submit">
@@ -77,6 +90,7 @@ import {
   IonInput,
   IonItem,
   IonLabel,
+  IonCheckbox,
   IonPage,
   IonTitle,
   IonToolbar,
@@ -101,6 +115,7 @@ export default {
     IonInput,
     IonItem,
     IonLabel,
+    IonCheckbox,
     IonPage,
     IonTitle,
     IonToolbar,
@@ -116,28 +131,36 @@ export default {
   data() {
     return {
       form: {
-        name: "",
+        firstName: "",
+        lastName: "",
         email: "",
-        password: "",
+        phoneNr: "",
+        license: false
+        // password: "",
       },
     };
   },
   computed: {},
   methods: {
     async handleRegister() {
-      if (this.form.name && this.form.email && this.form.password) {
+      if (this.form.firstName && this.form.lastName && this.form.email && this.form.phoneNr && this.form.license) {
         const registerUser = {
-          name: this.form.name,
+          firstName: this.form.firstName,
+          lastName: this.form.lastName,
           email: this.form.email,
-          password: this.form.password,
+          phoneNr: this.form.phoneNr,
+          license: this.form.license
+          // password: this.form.password,
         };
 
         // Register.
         try {
           await AuthService.register(
-            registerUser.name,
+            registerUser.firstName,
+            registerUser.lastName,
             registerUser.email,
-            registerUser.password
+            registerUser.phoneNr,
+            registerUser.license
           );
           this.router.push("/");
         } catch (error) {

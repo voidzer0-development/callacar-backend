@@ -1,5 +1,5 @@
 import ApiService from "./api.service";
-import { TokenService } from "./token.service";
+// import { TokenService } from "./token.service";
 
 class AuthenticationError extends Error {
   constructor(errorCode, message) {
@@ -18,16 +18,16 @@ class AuthenticationError extends Error {
 let user = null;
 
 const AuthService = {
-  async login(email, password) {
+  async login(email) {
     try {
       const response = await ApiService.post("/login", {
         email: email,
-        password: password
+        // password: password
       });
 
-      TokenService.saveToken(response.data.token);
-      ApiService.setHeader();
-      ApiService.mount401Interceptor();
+      // TokenService.saveToken(response.data.token);
+      // ApiService.setHeader();
+      // ApiService.mount401Interceptor();
 
       return response.data.token;
     } catch (error) {
@@ -35,20 +35,23 @@ const AuthService = {
     }
   },
 
-  async register(name, email, password) {
+  async register(firstName, lastName, email, phoneNr, license) {
     try {
-      const response = await ApiService.post("/register", {
-        name: name,
+      const response = await ApiService.post("/API/user/register", {
+        firstname: firstName,
+        lastname: lastName,
         email: email,
-        password: password,
-        is_admin: false
+        phonenr: phoneNr,
+        license: license,
+        // password: password,
+        // is_admin: false
       });
 
-      TokenService.saveToken(response.data.token);
-      ApiService.setHeader();
+      // TokenService.saveToken(response.data.token);
+      // ApiService.setHeader();
       ApiService.mount401Interceptor();
 
-      return response.data.token;
+      return response.data;
     } catch (error) {
       this.catchError(error);
     }
@@ -56,14 +59,17 @@ const AuthService = {
 
   async getUser() {
     try {
-      if (!user && TokenService.getToken()) {
+      if (!user) {
         try {
           const response = await ApiService.get("/me");
           user = {
-            "id": response.data.id,
-            "name": response.data.name,
+            // "id": response.data.id,
+            "firstname": response.data.firstName,
+            "lastname": response.data.lastName,
             "email": response.data.email,
-            "is_admin": response.data.is_admin || false,
+            "phoneNr": response.data.phoneNr,
+            "license": response.data.license
+            // "is_admin": response.data.is_admin || false,
           };
         } catch (error) {
           // Handled by 401 interceptor.
@@ -77,8 +83,8 @@ const AuthService = {
   },
 
   logout() {
-    TokenService.removeToken();
-    ApiService.removeHeader();
+    // TokenService.removeToken();
+    // ApiService.removeHeader();
     ApiService.unmount401Interceptor();
   },
 

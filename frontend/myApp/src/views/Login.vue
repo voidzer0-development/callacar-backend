@@ -83,6 +83,7 @@ import {
 import { logIn, personAdd } from "ionicons/icons";
 import { useRouter } from "vue-router";
 import { AuthenticationError, AuthService } from "@/services/auth.service";
+// , AuthService } 
 
 export default {
   name: "Login",

@@ -30,7 +30,7 @@ const app = createApp(App)
 import ApiService from '@/services/api.service';
 import { TokenService } from '@/services/token.service';
 
-ApiService.init('https://flierefluiter-backend.azurewebsites.net/');
+ApiService.init('http://localhost:8083');
 
 if (TokenService.getToken()) {
   ApiService.setHeader();
