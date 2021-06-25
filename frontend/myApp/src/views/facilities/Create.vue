@@ -16,38 +16,25 @@
       <form @submit.prevent="handleCreate">
         <div class="ion-padding">
           <ion-item>
-            <ion-label position="floating">Name</ion-label>
+            <ion-label position="floating">Start point</ion-label>
             <ion-input
               type="text"
               class="form-control"
-              v-model="facility.name"
-              id="facility_name"
+              v-model="ride.startPoint"
+              id="ride_startPoint"
               required
             />
           </ion-item>
 
           <ion-item>
-            <ion-label position="floating">Price</ion-label>
+            <ion-label position="floating">End point</ion-label>
             <ion-input
-              type="number"
-              step=".01"
+              type="text"
               class="form-control"
-              v-model="facility.price"
-              id="facility_price"
+              v-model="ride.endPoint"
+              id="ride_endPoint"
               required
             />
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Dependencies</ion-label>
-            <ion-select multiple="true" v-model="facility.dependencies">
-              <ion-select-option
-                v-for="utility in utilities"
-                :key="utility.id"
-                :value="utility.id"
-                >{{ utility.name }}</ion-select-option
-              >
-            </ion-select>
           </ion-item>
 
           <ion-button type="submit" :disabled="disableSubmit">
@@ -72,16 +59,15 @@ import {
   IonInput,
   IonLabel,
   IonItem,
-  IonSelect,
-  IonSelectOption,
   alertController,
 } from "@ionic/vue";
 
 import { defineComponent } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
-import { FacilityService } from "@/services/facility.service";
-import { UtilityService } from "@/services/utility.service";
+import { RideService } from "@/services/ride.service";
+import { TokenService} from "@/services/token.service";
+// import { UtilityService } from "@/services/utility.service";
 
 export default defineComponent({
   name: "Detail",
@@ -94,19 +80,23 @@ export default defineComponent({
       loading: true,
 
       disableSubmit: false,
-
-      facility: {
-        name: null,
-        price: null,
-        dependencies: null,
+      carId: null,
+      ride: {
+        customerId: null,
+        carId: null,
+        car: null,
+        startPoint: null,
+        endPoint: null,
+        lenghtKm: null,
+        costEuro: null,
+        paid: null
       },
-      utilities: null,
     };
   },
   async mounted() {
-    const utilResponse = await UtilityService.getUtilities();
-    this.utilities = utilResponse.data;
-
+    const route = useRoute();
+    this.carId = route.params.id;
+    
     this.loading = false;
   },
   methods: {
@@ -114,15 +104,18 @@ export default defineComponent({
       if (this.disableSubmit) return;
 
       const data = {
-        name: this.facility.name,
-        price: Number.parseFloat(this.facility.price) || 0,
-        dependencies: this.facility.dependencies,
+        carId: this.carId,
+        car: this.car,
+        startPoint: this.ride.startPoint,
+        endPoint: this.ride.endPoint,
+        customerId: await TokenService.getToken()
       };
 
       try {
         this.disableSubmit = true;
-        await FacilityService.createFacility(data);
-        this.router.push("/tabs/facilities");
+        const res = await RideService.create(data);
+        console.log(res);
+        this.router.push("/ride/" + res.data._id);
       } catch (error) {
         const errorAlert = await alertController.create({
           header: "Creating failed",
@@ -148,8 +141,6 @@ export default defineComponent({
     IonInput,
     IonLabel,
     IonItem,
-    IonSelect,
-    IonSelectOption,
   },
   setup() {
     const router = useRouter();

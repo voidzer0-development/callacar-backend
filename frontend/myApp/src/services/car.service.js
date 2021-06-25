@@ -2,7 +2,7 @@ import ApiService from "./api.service";
 
 const CarService = {
     async getAll() {
-        return await ApiService.get('/API/car');
+        return await ApiService.get('/API/car/');
     },
     async getById(id) {
         return await ApiService.get(`/API/car/${id}`);

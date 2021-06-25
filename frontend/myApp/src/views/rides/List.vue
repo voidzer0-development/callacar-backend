@@ -2,7 +2,7 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Cars</ion-title>
+        <ion-title>Rides</ion-title>
         <ion-buttons slot="primary">
           <ion-button button router-link="/facilities/create">
             <ion-icon slot="icon-only" :icon="add"></ion-icon>
@@ -21,15 +21,15 @@
 
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">cars</ion-title>
+          <ion-title size="large">Rides</ion-title>
         </ion-toolbar>
       </ion-header>
 
       <ion-list v-if="!loading">
         <ListItem
-          v-for="car in searchedItems"
-          :key="car.id"
-          :car="car"
+          v-for="ride in searchedItems"
+          :key="ride.id"
+          :ride="ride"
         />
       </ion-list>
       <ion-list v-else>
@@ -56,35 +56,35 @@ import {
 } from "@ionic/vue";
 
 import ListLoadingItems from "@/components/ListLoadingItems.vue";
-import ListItem from "@/components/facilities/ListItem.vue";
+import ListItem from "@/components/rides/ListItem.vue";
 import { defineComponent } from "vue";
 import { add } from "ionicons/icons";
 
-import { CarService } from "@/services/car.service";
+import { RideService } from "@/services/ride.service";
 
 export default defineComponent({
-  name: "cars",
+  name: "rides",
   data() {
     return {
       loading: true,
-      cars: null,
+      rides: null,
       search: null,
     };
   },
   computed: {
     searchedItems: function () {
-      const cars = this.cars;
+      const rides = this.rides;
       const query = this.search;
-      if (!query) return cars;
-      return cars?.filter(
+      if (!query) return rides;
+      return rides?.filter(
         (s) => s.name.toLowerCase().indexOf(query.toLowerCase()) > -1
       );
     },
   },
   async mounted() {
     console.log("waiting for response..")
-    const response = await CarService.getAll();
-    this.cars = response.data;
+    const response = await RideService.getAll();
+    this.rides = response.data;
     this.loading = false;
     console.log("got response:\n", response);
   },
@@ -93,8 +93,8 @@ export default defineComponent({
       try {
         this.loading = true;
         console.log("waiting for response..")
-        const response = await CarService.getAll();
-        this.cars = response.data;
+        const response = await RideService.getAll();
+        this.rides = response.data;
 
         this.loading = false;
         ev.target.complete();

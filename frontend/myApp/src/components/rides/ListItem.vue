@@ -1,17 +1,18 @@
 <template>
   <ion-item
-    v-if="car"
+    v-if="ride"
     button
-    :routerLink="'/order/' + car._id"
+    :routerLink="'/ride/' + ride._id"
     :detail="false"
     class="list-item"
   >
     <ion-icon :icon="locationOutline" slot="start" />
     <ion-label class="ion-text-wrap">
-      <h3>{{ car.brand }}</h3>
+      <h3>{{ ride.endPoint }}</h3>
       <ul id="acc-info">
-        <li>type: {{ car.type }}</li>
-        <li>model: {{ car.model }}</li>
+        <li>Startpoint: {{ ride.startPoint }}</li>
+        <li>endPoint: {{ ride.endPoint }}</li>
+        <li>car: {{ride.car}}</li>
       </ul>
     </ion-label>
   </ion-item>
@@ -30,7 +31,7 @@ export default defineComponent({
     IonIcon,
   },
   props: {
-    car: Object,
+    ride: Object,
   },
   setup() {
     return {

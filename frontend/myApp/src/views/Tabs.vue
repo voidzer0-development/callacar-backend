@@ -7,14 +7,14 @@
           <ion-label>Home</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="Reservations" href="/tabs/reservations">
+        <ion-tab-button tab="Rides" href="/tabs/rides">
           <ion-icon :icon="clipboardOutline" />
-          <ion-label>Reservations</ion-label>
+          <ion-label>Rides</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="Accomodations" href="/tabs/accomodations">
+        <ion-tab-button tab="Cars" href="/tabs/cars">
           <ion-icon :icon="bonfireOutline" />
-          <ion-label>Accomodations</ion-label>
+          <ion-label>cars</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="Sites" href="/tabs/sites" v-show="is_admin">

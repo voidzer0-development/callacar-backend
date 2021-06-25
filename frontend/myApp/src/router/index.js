@@ -25,8 +25,12 @@ const routes = [
         component: () => import('@/views/Home.vue')
       },
       {
-        path: 'reservations',
-        component: () => import('@/views/reservations/List.vue')
+        path: 'cars',
+        component: () => import('@/views/facilities/List.vue')
+      },
+      {
+        path: 'rides',
+        component: () => import('@/views/rides/List.vue')
       },
       {
         path: 'accomodations',
@@ -84,9 +88,13 @@ const routes = [
 
    // Facilities
    {
-    path: '/facilities/:id',
+    path: '/ride/:id',
     component: () => import('@/views/facilities/Detail.vue'),
     meta: { admin: true }
+  },
+  {
+    path: '/order/:id',
+    component: () => import('@/views/facilities/Create.vue'),
   },
   {
     path: '/facilities/create',
