@@ -34,7 +34,7 @@
               ></ion-input>
             </ion-item>
 
-            <ion-item>
+            <!-- <ion-item>
               <ion-label position="floating">Password</ion-label>
               <ion-input
                 type="password"
@@ -42,7 +42,7 @@
                 id="password"
                 required
               ></ion-input>
-            </ion-item>
+            </ion-item> -->
           </ion-card-content>
 
           <ion-card-content>
@@ -115,21 +115,20 @@ export default {
     return {
       form: {
         email: "",
-        password: "",
+        // password: "",
       },
     };
   },
   methods: {
     async handleLogin() {
-      if (this.form.email && this.form.password) {
+      if (this.form.email) {
         const loginUser = {
-          email: this.form.email,
-          password: this.form.password,
+          email: this.form.email
         };
 
         // Login.
         try {
-          await AuthService.login(loginUser.email, loginUser.password);
+          await AuthService.login(loginUser.email);
           this.router.push("/");
         } catch (error) {
           if (error instanceof AuthenticationError) {

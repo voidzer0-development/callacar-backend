@@ -4,7 +4,7 @@ import Tabs from '@/views/Tabs.vue'
 import Login from '@/views/Login.vue';
 import Register from '@/views/Register.vue';
 
-// import { TokenService } from '@/services/token.service';
+import { TokenService } from '@/services/token.service';
 // import { AuthService } from "@/services/auth.service";
 
 const routes = [
@@ -151,25 +151,26 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  // const loggedIn = !!TokenService.getToken();
-  const loggedIn = false;
+  const loggedIn = !!TokenService.getToken();
+
 
 
   // Get the types of the current route.
   // const isAdmin = to.matched.some(record => record.meta.admin);
   const isPublic = to.matched.some(record => record.meta.public);
-  // const isGuest = to.matched.some(record => record.meta.guest);
+  const isGuest = to.matched.some(record => record.meta.guest);
 
-  if (!isPublic && !loggedIn) {
+  if (!isPublic &&!loggedIn) {
+    console.log("redirectign");
     return next({
       path: '/login',
       query: { redirect: to.fullPath }
     });
   }
 
-  // if (isGuest && loggedIn) {
-  //   return next("/");
-  // }
+  if (isGuest && loggedIn) {
+    return next("/");
+  }
 
   // const user = await AuthService.getUser();
   // if (isAdmin && !user.is_admin) {

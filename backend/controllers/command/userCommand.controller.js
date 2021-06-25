@@ -4,7 +4,11 @@ const MQService = require('../../utils/MQService.utils');
 // firstname, lastname, email, phoneNr, license
 const UserCreate = (req, res, next) => {
   const UserNew = new UserWrite({
-    operationId: req.body.operationId,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    email: req.body.email,
+    phoneNr: req.body.phoneNr,
+    license: req.body.license
   });
 
   UserNew.save(async (err) => {
