@@ -19,4 +19,4 @@ const CarService = {
     }
 }
 
-export { RideService };
+export { CarService };
