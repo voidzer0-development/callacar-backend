@@ -13,15 +13,13 @@
       </ion-header>
 
       <ion-card>
-        <ion-img src="https://picsum.photos/id/190/1280/720" />
+        <ion-img src="https://www.driving.co.uk/s3/st-driving-prod/uploads/2020/12/Zoox-1.jpg" />
         <ion-card-header>
-          <ion-card-title>Flierefluiter Campings</ion-card-title>
+          <ion-card-title>Call-a-car</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          Welcome to the app of De Flierefluiter Campings. In this app, you'll
-          be able to make reservations, get information about the different
-          accomodations and their locations, get various exciting facilities for
-          your stay, and much more.
+          Welcome to call-a-car, your self driving taxi service.
+          You may proceed to order a car on demand.
         </ion-card-content>
         <ion-item button router-link="/tabs/accomodations">
           <ion-icon :icon="bonfireOutline" slot="start"></ion-icon>
@@ -36,7 +34,7 @@
       </ion-card>
 
       <ion-card v-if="user">
-        <ion-img src="https://picsum.photos/id/109/1280/720" />
+        <ion-img src="https://www.driving.co.uk/s3/st-driving-prod/uploads/2020/12/Zoox-1.jpg" />
         <ion-card-header>
           <ion-card-title>Welcome, {{ user.name }}!</ion-card-title>
         </ion-card-header>
