@@ -1,7 +1,0 @@
-{
-  "name": "CallACar-Client",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "vue"
-}
