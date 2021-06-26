@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const rideReadSchema = new Schema({
+	carId: {
+        type: String,
+        required: true
+    },
     car: {
         type: String,
         required: true

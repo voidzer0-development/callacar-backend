@@ -4,6 +4,7 @@ const MQService = require('../../utils/MQService.utils');
 const RideCreate = (req, res, next) => {
   const RideNew = new RideWrite({
     //car, customerId, startPoint, endPoint, lengthKm, costEuro, paid
+    carId: req.body.carId,
     car: req.body.car,
     customerId: req.body.customerId,
     startPoint: req.body.startPoint,
