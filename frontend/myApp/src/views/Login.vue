@@ -19,8 +19,7 @@
           </ion-card-header>
 
           <ion-card-content>
-            Please log in to get access the reservations, sites, accomodations
-            and more in the Flierefluiter app!
+            Please log in to get access to the Call A Car app!
           </ion-card-content>
 
           <ion-card-content>

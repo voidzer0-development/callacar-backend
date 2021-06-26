@@ -26,35 +26,11 @@ const routes = [
       },
       {
         path: 'cars',
-        component: () => import('@/views/facilities/List.vue')
+        component: () => import('@/views/cars/List.vue')
       },
       {
         path: 'rides',
         component: () => import('@/views/rides/List.vue')
-      },
-      {
-        path: 'accomodations',
-        component: () => import('@/views/accomodations/List.vue')
-      },
-      {
-        path: 'sites',
-        component: () => import('@/views/sites/List.vue'),
-        meta: { admin: true }
-      },
-      {
-        path: 'facilities',
-        component: () => import('@/views/facilities/List.vue'),
-        meta: { admin: true }
-      },
-      {
-        path: 'utilities',
-        component: () => import('@/views/utilities/List.vue'),
-        meta: { admin: true }
-      },
-      {
-        path: 'customers',
-        component: () => import('@/views/customers/List.vue'),
-        meta: { admin: true }
       },
       // {
       //   path: 'ride',
@@ -63,74 +39,14 @@ const routes = [
       // }
     ]
   },
-  // Accomodations
-  {
-    path: '/accomodations/:id',
-    component: () => import('@/views/accomodations/Detail.vue')
-  },
-  {
-    path: '/accomodations/create',
-    component: () => import('@/views/accomodations/Create.vue'),
-    meta: { admin: true }
-  },
-
-  // Sites
-  {
-    path: '/sites/:id',
-    component: () => import('@/views/sites/Detail.vue'),
-    meta: { admin: true }
-  },
-  {
-    path: '/sites/create',
-    component: () => import('@/views/sites/Create.vue'),
-    meta: { admin: true }
-  },
-
-   // Facilities
    {
     path: '/ride/:id',
-    component: () => import('@/views/facilities/Detail.vue'),
+    component: () => import('@/views/rides/Detail.vue'),
     meta: { admin: true }
   },
   {
     path: '/order/:id',
-    component: () => import('@/views/facilities/Create.vue'),
-  },
-  {
-    path: '/facilities/create',
-    component: () => import('@/views/facilities/Create.vue'),
-    meta: { admin: true }
-  },
-
-     // Utilities
-     {
-      path: '/utilities/:id',
-      component: () => import('@/views/utilities/Detail.vue'),
-      meta: { admin: true }
-    },
-    {
-      path: '/utilities/create',
-      component: () => import('@/views/utilities/Create.vue'),
-      meta: { admin: true }
-    },
-
-  // Customers
-  {
-    path: '/customers/:id',
-    component: () => import('@/views/customers/Detail.vue'),
-    meta: { admin: true }
-  },
-  {
-    path: '/customers/create',
-    component: () => import('@/views/customers/Create.vue'),
-    meta: { admin: true }
-  },
-
-  //reservations
-  {
-    path: '/reservations/:id',
-    component: () => import('@/views/reservations/Detail.vue'),
-    meta: { admin: true }
+    component: () => import('@/views/rides/Create.vue'),
   },
 
   // Authentication

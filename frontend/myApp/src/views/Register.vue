@@ -19,8 +19,8 @@
           </ion-card-header>
 
           <ion-card-content>
-            Welcome to the Flierefluiter app! If you don't have an account yet,
-            you can sign up here to get access to the Flierefluiter app.
+            Welcome to the Call a Car app! If you don't have an account yet,
+            you can sign up here to get access to the Call a Car app.
           </ion-card-content>
 
           <ion-card-content>

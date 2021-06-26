@@ -13,7 +13,7 @@
         </ion-tab-button>
 
         <ion-tab-button tab="Cars" href="/tabs/cars">
-          <ion-icon :icon="bonfireOutline" />
+          <ion-icon :icon="carOutline" />
           <ion-label>cars</ion-label>
         </ion-tab-button>
 
@@ -64,7 +64,7 @@ import {
 } from "@ionic/vue";
 
 import {
-  bonfireOutline,
+  carOutline,
   homeOutline,
   locationOutline,
   personOutline,
@@ -90,7 +90,7 @@ export default {
   },
   setup() {
     return {
-      bonfireOutline,
+      carOutline,
       homeOutline,
       locationOutline,
       personOutline,

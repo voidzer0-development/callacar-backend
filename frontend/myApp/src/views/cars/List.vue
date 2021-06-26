@@ -2,9 +2,9 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Accomodations</ion-title>
-        <ion-buttons slot="primary" v-show="is_admin">
-          <ion-button button router-link="/accomodations/create">
+        <ion-title>Cars</ion-title>
+        <ion-buttons slot="primary">
+          <ion-button button router-link="/facilities/create">
             <ion-icon slot="icon-only" :icon="add"></ion-icon>
           </ion-button>
         </ion-buttons>
@@ -21,15 +21,15 @@
 
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Accomodations</ion-title>
+          <ion-title size="large">cars</ion-title>
         </ion-toolbar>
       </ion-header>
 
       <ion-list v-if="!loading">
         <ListItem
-          v-for="accomodation in searchedItems"
-          :key="accomodation.id"
-          :accomodation="accomodation"
+          v-for="car in searchedItems"
+          :key="car.id"
+          :car="car"
         />
       </ion-list>
       <ion-list v-else>
@@ -56,58 +56,49 @@ import {
 } from "@ionic/vue";
 
 import ListLoadingItems from "@/components/ListLoadingItems.vue";
-import ListItem from "@/components/accomodations/ListItem.vue";
+import ListItem from "@/components/cars/ListItem.vue";
 import { defineComponent } from "vue";
 import { add } from "ionicons/icons";
 
-import { AuthService } from "@/services/auth.service";
-import { AccomodationService } from "@/services/accomodation.service";
+import { CarService } from "@/services/car.service";
 
 export default defineComponent({
-  name: "Accomodations",
+  name: "cars",
   data() {
     return {
-      is_admin: false,
       loading: true,
-      accomodations: null,
+      cars: null,
       search: null,
     };
   },
   computed: {
     searchedItems: function () {
-      const accomodations = this.accomodations;
+      const cars = this.cars;
       const query = this.search;
-      if (!query) return accomodations;
-      return accomodations?.filter(
+      if (!query) return cars;
+      return cars?.filter(
         (s) => s.name.toLowerCase().indexOf(query.toLowerCase()) > -1
       );
     },
   },
   async mounted() {
-    // Checks access to the "+" button in the toolbar.
-    try {
-      const user = await AuthService.getUser();
-      this.is_admin = user.is_admin;
-    } catch (error) {
-      this.is_admin = false;
-    }
-
-    // Actually retrieves the data.
-    const response = await AccomodationService.getAccomodations();
-    this.accomodations = response.data;
-
+    console.log("waiting for response..")
+    const response = await CarService.getAll();
+    this.cars = response.data;
     this.loading = false;
+    console.log("got response:\n", response);
   },
   methods: {
     refresh: async function (ev) {
       try {
         this.loading = true;
-
-        const response = await AccomodationService.getAccomodations();
-        this.accomodations = response.data;
+        console.log("waiting for response..")
+        const response = await CarService.getAll();
+        this.cars = response.data;
 
         this.loading = false;
         ev.target.complete();
+        console.log("got response:\n", response);
       } catch (error) {
         ev.target.cancel();
       }
