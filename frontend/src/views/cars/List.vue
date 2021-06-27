@@ -77,7 +77,7 @@ export default defineComponent({
       const query = this.search;
       if (!query) return cars;
       return cars?.filter(
-        (s) => s.name.toLowerCase().indexOf(query.toLowerCase()) > -1
+        (s) => s.model.toLowerCase().indexOf(query.toLowerCase()) > -1
       );
     },
   },
