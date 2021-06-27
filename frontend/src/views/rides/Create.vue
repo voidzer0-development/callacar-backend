@@ -119,7 +119,7 @@ export default defineComponent({
       } catch (error) {
         const errorAlert = await alertController.create({
           header: "Creating failed",
-          message: `Something went wrong trying to create this facility: ${
+          message: `Something went wrong trying to create this ride: ${
             error.message || "Unknown Error"
           }`,
           buttons: ["OK"],
