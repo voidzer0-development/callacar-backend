@@ -83,7 +83,7 @@ export default defineComponent({
       carId: null,
       ride: {
         customerId: null,
-        carId: null,
+        //carId: null,
         car: null,
         startPoint: null,
         endPoint: null,
@@ -95,7 +95,7 @@ export default defineComponent({
   },
   async mounted() {
     const route = useRoute();
-    this.carId = route.params.id;
+    this.car = route.params.id;
     
     this.loading = false;
   },
@@ -104,7 +104,7 @@ export default defineComponent({
       if (this.disableSubmit) return;
 
       const data = {
-        carId: this.carId,
+        //carId: this.carId,
         car: this.car,
         startPoint: this.ride.startPoint,
         endPoint: this.ride.endPoint,
